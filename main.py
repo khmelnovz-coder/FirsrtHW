@@ -1,13 +1,14 @@
 import sys
 import sqlite3
 from PyQt6.QtWidgets import QApplication, QMainWindow, QDialog, QTableWidgetItem
-from PyQt6 import uic
+from frontend_main import Ui_MainWindow
+from addEditCoffeeForm import Ui_AddEditForm
 
 
-class AddEditCoffeeForm(QDialog):
+class AddEditCoffeeForm(QDialog, Ui_AddEditForm):
     def __init__(self, coffee_id=None):
         super().__init__()
-        uic.loadUi("addEditCoffeeForm.ui", self)
+        self.setupUi(self)
         self.coffee_id = coffee_id
         if self.coffee_id is not None:
             self.load_coffee_data()
@@ -66,10 +67,10 @@ class AddEditCoffeeForm(QDialog):
         self.accept()
 
 
-class MainWindow(QMainWindow):
+class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
-        self.ui = uic.loadUi("main.ui", self)
+        self.setupUi(self)
         self.init_db()
         self.load_db()
 
